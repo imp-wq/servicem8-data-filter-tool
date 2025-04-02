@@ -144,11 +144,11 @@ def write_jobs_to_excel(jobs: list, file_path: str = FILE_PATH, sheet_title: str
         workbook = load_workbook(file_path)
 
         # Check if the sheet exists, create if it doesn't
-        if SHEET_TITLE in workbook.sheetnames:
-            sheet = workbook[SHEET_TITLE]
+        if sheet_title in workbook.sheetnames:
+            sheet = workbook[sheet_title]
         else:
             sheet = workbook.create_sheet(title=SHEET_TITLE)
-            logging.info(f"Sheet '{SHEET_TITLE}' not found. Created a new one.")
+            logging.info(f"Sheet '{sheet_title}' not found. Created a new one.")
 
             # Write headers in the new sheet
             for col_index, header in enumerate(headers, start=1):

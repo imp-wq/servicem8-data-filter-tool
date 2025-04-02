@@ -64,14 +64,14 @@ SCOPE = [
 ]
 
 
-def get_oauth_login_url():
-    params = {
-        "client_id": SERVICEM8_CLIENT_ID,
-        "redirect_uri": SERVICEM8_REDIRECT_URI,
-        "response_type": "code",
-        "scope": " ".join(SCOPE)  # Adjust based on required scopes
-    }
-    return f"{SERVICEM8_AUTH_URL}?{urlencode(params)}"
+# def get_oauth_login_url():
+#     params = {
+#         "client_id": SERVICEM8_CLIENT_ID,
+#         "redirect_uri": SERVICEM8_REDIRECT_URI,
+#         "response_type": "code",
+#         "scope": " ".join(SCOPE)  # Adjust based on required scopes
+#     }
+#     return f"{SERVICEM8_AUTH_URL}?{urlencode(params)}"
 
 
 DEFAULT_JOB_QUEUE = "303c135a-2150-4a12-9a6b-228db8019d8b"
