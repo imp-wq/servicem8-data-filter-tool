@@ -1,0 +1,63 @@
+# Python cache and artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Ignore JetBrains IDE (e.g., IntelliJ, WebStorm, PyCharm) project settings
+.idea/
+
+# Environment
+.env
+.venv/
+venv/
+env/
+ENV/
+*.env
+
+# PyInstaller
+build/
+dist/
+*.spec
+
+# Logs
+*.log
+*.log.*
+
+# macOS files
+.DS_Store
+
+# Installer files
+*.dmg
+*.app
+*.pkg
+
+# VSCode / JetBrains IDEs
+.vscode/
+.idea/
+
+# Bytecode and temporary files
+*.bak
+*.tmp
+*.swp
+*~
+
+# GitHub Actions artifacts (optional)
+*.zip
+*.tar.gz
+
+# Ignore uploaded artifacts
+*.exe
+*.tar
+*.gz
+
+# Token / secret file (if exists)
+config.pyc
+secrets.json
+
+# ignore all generated sheet files
+*.xlsx
+
+data-format.txt
+
