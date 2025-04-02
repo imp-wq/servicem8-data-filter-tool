@@ -1,4 +1,4 @@
-name: Build macOS GUI App
+name: Build GUI App for macOS and Windows
 
 on:
   push:
@@ -7,7 +7,10 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest]
 
     steps:
     - name: Checkout Code
@@ -26,10 +29,10 @@ jobs:
 
     - name: Build app with PyInstaller
       run: |
-        pyinstaller --onefile --windowed ui.py
+        pyinstaller ui.spec
 
-    - name: Upload app binary
+    - name: Upload built app
       uses: actions/upload-artifact@v4
       with:
-        name: macos-app
+        name: ${{ runner.os }}-app
         path: dist/*
