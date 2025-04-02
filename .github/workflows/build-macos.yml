@@ -26,7 +26,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install pyinstaller
-
+  
+    - name: Create .env file from GitHub Secrets
+      run: |
+        echo "SERVICEM8_CLIENT_ID=${{ secrets.SERVICEM8_CLIENT_ID }}" >> .env
+        echo "SERVICEM8_CLIENT_SECRET=${{ secrets.SERVICEM8_CLIENT_SECRET }}" >> .env
+        echo "SCOPE=${{ secrets.SCOPE }}" >> .env
+        
     - name: Build app with PyInstaller
       run: |
         pyinstaller ui.spec
