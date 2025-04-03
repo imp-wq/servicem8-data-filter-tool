@@ -45,6 +45,7 @@ class SheetWriterUI:
             else:
                 messagebox.showwarning("Warning", "Process completed with issues.")
         except Exception as e:
+            logging.error(e)
             messagebox.showerror("Error", str(e))
 
     def process_data(self, file_path, sheet_title):
@@ -52,6 +53,8 @@ class SheetWriterUI:
 
         logging.info(f"Processing file: {file_path} with sheet title: {sheet_title}")
         staff_uuid = query_staff_uuid(access_token)
+
+        logging.info(f"Query staff uuid: {staff_uuid}")
         jobs = query_jobs(access_token, staff_uuid)
         write_jobs_to_excel(jobs, file_path, sheet_title)
         return True  # Simulate success

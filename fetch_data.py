@@ -95,16 +95,20 @@ def query_staff_uuid(access_token: str):
         "Authorization": f"Bearer {access_token}",
     }
     response = requests.get(url, headers=headers)
-
+    response.raise_for_status()
     staff_list = response.json()
+
     search_by_name = jmespath.search(f"[?first=='{STAFF_FIRST}' && last=='{STAFF_LAST}']", staff_list)
+    if len(search_by_name) <= 0:
+        error_msg = f"""No staff whose:
+        first={STAFF_FIRST}
+        last={STAFF_LAST}
+        can be found"""
+        logging.error(error_msg)
+        raise ValueError(error_msg)
+
     search_uuid = jmespath.search("[].uuid", search_by_name)
-    if len(search_uuid) <= 0:
-        logging.error(f"""No staff whose:
-        first='{STAFF_FIRST}
-        last={STAFF_LAST}'
-        can be found""")
-        raise ValueError()
+
     uuid = search_uuid[0]
     return uuid
 
@@ -121,6 +125,9 @@ def query_jobs(access_token: str, staff_uuid: str):
     # Use jmespath to filter for jobs where staff_uuid equals the given_uuid
     query = f"[?{FIELD_KEY}=='{staff_uuid}']"
     filtered_jobs = jmespath.search(query, jobs)
+    if filtered_jobs is None or len(filtered_jobs) <= 0:
+        raise ValueError(f"No jobs found created by {STAFF_FIRST} {STAFF_LAST}")
+    logging.info(f"Found {len(filtered_jobs)} jobs")
 
     # Dynamically create the projection string from DISPLAYED_KEY_LIST.
     projection = ", ".join([f"{field}: {field}" for field in DISPLAYED_KEY_LIST])
