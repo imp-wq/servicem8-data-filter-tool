@@ -49,6 +49,7 @@ class SheetWriterUI:
 
     def process_data(self, file_path, sheet_title):
         access_token = run_oauth_flow()
+
         logging.info(f"Processing file: {file_path} with sheet title: {sheet_title}")
         staff_uuid = query_staff_uuid(access_token)
         jobs = query_jobs(access_token, staff_uuid)

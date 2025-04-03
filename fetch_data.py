@@ -147,7 +147,7 @@ def write_jobs_to_excel(jobs: list, file_path: str = FILE_PATH, sheet_title: str
         if sheet_title in workbook.sheetnames:
             sheet = workbook[sheet_title]
         else:
-            sheet = workbook.create_sheet(title=SHEET_TITLE)
+            sheet = workbook.create_sheet(title=sheet_title)
             logging.info(f"Sheet '{sheet_title}' not found. Created a new one.")
 
             # Write headers in the new sheet
@@ -172,7 +172,7 @@ def write_jobs_to_excel(jobs: list, file_path: str = FILE_PATH, sheet_title: str
             sheet.cell(row=start_row + i, column=j + 1, value=job.get(key, ""))
 
     workbook.save(file_path)
-    logging.info(f"File {file_path} written {len(jobs)} rows.")
+    logging.info(f"File {file_path} {sheet_title} written {len(jobs)} rows.")
 
 
 def test(access_token: str):
